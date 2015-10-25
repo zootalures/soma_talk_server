@@ -18,7 +18,8 @@
                  [cljs-webgl "0.1.5-SNAPSHOT"]
                  [org.clojure/core.async "0.1.346.0-17112a-alpha"]
                  [cljs-http "0.1.21"]
-                 [com.taoensso/sente "1.6.0"]]
+                 [com.taoensso/sente "1.6.0"]
+                 [prismatic/dommy "1.1.0"]]
 
   :cljsbuild {:builds [{:id "dev"
                         :source-paths ["src-cljs"]
