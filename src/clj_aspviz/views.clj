@@ -14,10 +14,12 @@
          [:body
           [:h1 "ASPViz"]
           [:div {:id "solverform"}
-           [:textarea {:name "program"} "a:- not b. b:- not a."]
-           [:button {:id "solveit"}  "Solve it"]]
+           [:textarea {:id "program"} "a:- not b. b:- not a."]
+           [:button {:id "solveit"}  "Solve it"]
+           [:button {:id "bigsolve"}  "Big Solve"]]
+          [:div {:id  "result"} "result"]
           [:div {:id  "display"}
            [:canvas {:id "glcanvas"}]]
-          [:script {:type "text/javascript" } "goog.require('clj_aspviz.ui'); clj_aspviz.ui.init();" ]]
+          [:script {:type "text/javascript" } "goog.require('clj_aspviz.ui');" ]]
          )
   )

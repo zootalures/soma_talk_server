@@ -5,14 +5,24 @@
             [cljs.core.async :refer [put! <!  >! chan timeout]]
             ))
 
-(defn solve-program
+(defn term-as-str
+  [term]
+  (cond
+    (seqable? term) (str (name (first term ))
+                    (if-let [restval (seq (rest term))]
+                      (str "(" (clojure.string/join "," (map term-as-str restval)) ")")
+                      ""))
+    :else term
+    ))
+
+
+(defn solve-programs
   "solves a program returns a channel which yeilds the answer sets "
-  [prog]
+  [progs]
   (let [c (chan)]
     (go (let [result
-              (<! (http/post "/solver" {:body prog :headers {:content-type "text/plain"}}))]
-          (println "got result " result)
-
-          (>! c  result)))
+              (<! (http/post "/solver" {:body {:progs progs} :headers {"Content-Type" "application/edn"}}))]
+          (.log js/console "got result " result)
+          (>! c  (:body result))))
     c))
 

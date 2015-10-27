@@ -11,6 +11,7 @@
                  [http-kit "2.1.18"]
                  [ring/ring-devel "1.4.0"]
                  [ring/ring-core "1.4.0"]
+                 [fogus/ring-edn "0.3.0"]
                  [javax.servlet/servlet-api "2.5"]
                  [compojure "1.4.0"]
                  [clj-ansprog "0.1.0-SNAPSHOT"]
@@ -19,7 +20,8 @@
                  [org.clojure/core.async "0.1.346.0-17112a-alpha"]
                  [cljs-http "0.1.21"]
                  [com.taoensso/sente "1.6.0"]
-                 [prismatic/dommy "1.1.0"]]
+                 [prismatic/dommy "1.1.0"]
+                 [com.taoensso/sente "1.6.0"] ]
 
   :cljsbuild {:builds [{:id "dev"
                         :source-paths ["src-cljs"]
