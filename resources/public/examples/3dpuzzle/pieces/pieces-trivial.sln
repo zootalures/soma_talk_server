@@ -1,0 +1,15 @@
+clingo version 4.5.2
+Reading from generatepieces.lp
+Solving...
+Answer: 28
+part(p(0,0,0)) part(p(1,0,0))
+Answer: 33
+part(p(0,0,0)) part(p(0,1,0))
+Answer: 36
+part(p(0,0,0)) part(p(0,0,1))
+SATISFIABLE
+
+Models       : 26    
+Calls        : 1
+Time         : 0.351s (Solving: 0.13s 1st Model: 0.01s Unsat: 0.00s)
+CPU Time     : 0.340s

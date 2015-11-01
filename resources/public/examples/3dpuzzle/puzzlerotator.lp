@@ -1,17 +1,14 @@
 
-posv(-4..4).
+posv(-3..2).
 boxv(0..2).
-rotv(0..3).
-rotvz(0).
-rotvz(1).
-rotvz(3).
+rotv(0..2).
 
-% Every piece has exactly one rotation
+% Every piece has exactly one rotation in each axes
 
 
 1{rotx(P,R) : rotv(R)}1 :-piece(P) .
 1{roty(P,R) : rotv(R)}1 :-piece(P) .
-1{rotz(P,R) : rotvz(R)}1 :-piece(P) .
+1{rotz(P,R) : rotv(R)}1 :-piece(P) .
 
 
 
@@ -87,7 +84,8 @@ partf(P,NX+TX,NY+TY,NZ+TZ):-
       roty(P,RY),
       rotz(P,RZ),
       rotv(RX;RY;RZ),
-      partr3(P,RX,RY,RZ,NX,NY,NZ), boxv(NX+TX;NY+TY;NZ+TZ).
+      partr3(P,RX,RY,RZ,NX,NY,NZ),
+       boxv(NX+TX;NY+TY;NZ+TZ).
 
 
 partf(P,NX,NY,NZ):-
@@ -117,10 +115,9 @@ partf(P,NX,NY,NZ):-
 
 
 
-:- partf(P1,X,Y,Z), partf(P2,X,Y,Z), P1!=P2,piece(P1;P2),posx(X),posy(Y),posz(Z).
+:- partf(P1,X,Y,Z), partf(P2,X,Y,Z), P1!=P2,piece(P1;P2),posv(X),posv(Y),posv(Z).
 
-filled(X,Y,Z):- partf(P,X,Y,Z),piece(P),posx(X),posy(Y),posz(Z).
-%:- not filled(X,Y,Z), posx(X),posy(Y),posz(Z).
+filled(X,Y,Z):- partf(P,X,Y,Z),piece(P),posv(X),posv(Y),posv(Z).
 
 
 #show rotx/2.
