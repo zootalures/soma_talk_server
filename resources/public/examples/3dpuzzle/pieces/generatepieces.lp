@@ -4,7 +4,7 @@ pos(0..2).
 axis(x;y;z).
 
 % generate all combinations of 3 and four blocks in the cube
-3 { part(p(X,Y,Z)) : pos(X), pos(Y), pos(Z)} 3.
+3 { part(p(X,Y,Z)) : pos(X), pos(Y), pos(Z)} 4.
 
 % index the location of each part in each axis
 loc(x,p(X,Y,Z),X) :- part(p(X,Y,Z)).
@@ -32,8 +32,18 @@ connected(P1,P3) :- connected(P1,P2), connected(P2,P3) .
 disconnected :- not connected(P1, P2), part(P1), part(P2).
 :- disconnected.
 
+
 % an corner  consists of three adjacent pieces, adjacent in two distinct axes.
-hasinflection :- adjacent(A1,P1,P2), adjacent(A2,P2,P3), P1!=P3 , A1!=A2.
+% but excluding the cas where there is a piece inside the corner
+corner(P2,A3) :-
+ adjacent(A1,P1,P2), adjacent(A2,P2,P3),
+ axis(A3), A1!=A2, A2!=A3,
+ P1!=P3 , A1!=A2,A1!=A3.
+
+oppositecorners(P1,P2,A):- corner(P1,A), corner(P2,A),
+ adjacent(_,P1,P3), adjacent(_,P2,P3), P1!=P3,P1!=P2.
+
+hasinflection :- corner(P2,A3), not oppositecorners(P1,_,A3),part(P1).
 
 % only interested in pieces with at least one corner
 :- not hasinflection.
@@ -44,5 +54,7 @@ touching(A) :- part(P), loc(A,P,0).
 :- not touching(x).
 :- not touching(y).
 :- not touching(z).
+
+
 
 #show part/1.
