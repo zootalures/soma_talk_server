@@ -8,13 +8,16 @@ loc(L) :- placepart(_,_,_,L).
 % pick exactly one rotation and translation for each piece
 1{translate_part(P,R,T) : placepart(P,R,T,_) }1 :- piece(P) .
 
-occupied_by(P,L):- translate_part(P,R,T),placepart(P,R,T,L).
+% place each part  of each piece according to its translation and rotation
+part(P,L):- translate_part(P,R,T),placepart(P,R,T,L).
 
-:- occupied_by(P1,L),occupied_by(P2,L),P1!=P2.
+% two parts cannot occupy the same coordinate
+:- part(P1,L),part(P2,L),P1!=P2.
 
-occupied(L):- occupied_by(P,L).
+% each cube must be occupied
+occupied(L):- part(P,L).
 :- not occupied(L), loc(L).
 
-#show piece/1.
+#show part/2.
 %#show translate_part/3.
 %#show occupied_by/2.
